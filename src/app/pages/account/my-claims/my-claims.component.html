@@ -1,0 +1,23 @@
+<div class="mat-table orders-table">
+    <div class="mat-header-row">
+      <div class="mat-header-cell">Title</div>
+      <div class="mat-header-cell">Status</div>
+      <div class="mat-header-cell">Date</div>
+      <div class="mat-header-cell"></div>
+    </div>
+    <div *ngFor="let c of listClaim" class="mat-row">
+      <div class="mat-cell"><span class="order">{{c.subject}}</span></div>
+      <div class="mat-cell">{{c.status}}</div>
+      <div class="mat-cell">{{c.date | date: 'MMM d, y, h:mm:ss a'}}</div>     
+      <div class="mat-cell">
+        <div class="p-1 actions">          
+          <button mat-mini-fab color="primary" matTooltip="View">
+              <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button  mat-mini-fab color="warn" matTooltip="View invoice" class="btn-invoice">
+              <mat-icon>receipt</mat-icon>
+          </button>
+        </div>
+      </div>      
+    </div>
+  </div>

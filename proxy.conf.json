@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "http://localhost:9080/PIDEV-web/rest",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, PatternValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { emailValidator, matchingPasswords } from '../../theme/utils/app-validators';
 import { UserService } from 'src/Services/UserService';
 import { Prospect } from 'src/Models/Prospect';
+import {MatDialog} from '@angular/material/dialog';
+import { ForgetDialogComponent } from '../forget-dialog/forget-dialog.component';
+
+
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +22,7 @@ export class SignInComponent implements OnInit {
   registerResult = ";"
   exist =""
   
-  constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar,private us:UserService) { }
+  constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar,private us:UserService,private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -48,10 +52,10 @@ export class SignInComponent implements OnInit {
          console.log(this.user)
           if(this.user!=null){
             if(!this.user.confirmed){
-              this.loginMessage="you need to confirm your registration first"
+              this.snackBar.open('you need to confirm your registration first!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
             }else
             if(this.user.disabled){
-              this.loginMessage="this account is disabled please reactivate your account first"
+              this.snackBar.open('this account is disabled please reactivate your account first!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
             }
             else{
             localStorage.setItem('User',JSON.stringify(this.user));
@@ -84,6 +88,17 @@ export class SignInComponent implements OnInit {
       }
     })
     
+}
+
+openDialog(): void {
+  const dialogRef = this.dialog.open(ForgetDialogComponent, {
+    width: '600px',height: '250px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    
+
+  });
 }
 
 }

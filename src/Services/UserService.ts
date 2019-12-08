@@ -18,7 +18,11 @@ export class UserService {
     return this.http.post(this.baseUrl + "/user?login=" + login + "&pswd=" + password + "&fName=" + first + "&lName=" + last + "&phone=" + phone + "&op=" + operator, null, { responseType: 'text' });
   }
 
-   mailVerif(control: string) {
-    return this.http.get(this.baseUrl+"/user/mailVerif?mail="+control, { responseType: 'text' })
+  mailVerif(control: string) {
+    return this.http.get(this.baseUrl + "/user/mailVerif?mail=" + control, { responseType: 'text' })
+  }
+
+  forgetPassword(mail:string){
+    return this.http.post(this.baseUrl+"/user?login="+mail,null,{ responseType: 'text' })
   }
 }

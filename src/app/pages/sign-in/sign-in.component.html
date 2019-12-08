@@ -14,7 +14,11 @@
                     <input matInput placeholder="Password" formControlName="password" required type="password">
                     <mat-error *ngIf="loginForm.controls.password.errors?.required">Password is required</mat-error>
                     <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>                    
-                </mat-form-field> 
+                </mat-form-field>
+                <br>
+                <div class="text-muted">
+                        <p (click)="openDialog()"><strong><i>Forget your Password ?</i></strong></p>       
+                </div> 
                 <div class="text-center mt-2">
                     <button mat-fab color="primary" class="mat-elevation-z6" type="submit">
                         <mat-icon>exit_to_app</mat-icon>

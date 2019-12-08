@@ -28,6 +28,7 @@ import { FooterComponent } from './theme/components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
    imports: [
     BrowserModule,
@@ -51,7 +52,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SidenavMenuComponent,
     BreadcrumbComponent,
     OptionsComponent,
-    FooterComponent    
+    FooterComponent   
   ], 
   providers: [
     AppSettings,

@@ -5,6 +5,7 @@ import { ProductDialogComponent } from '../../shared/products-carousel/product-d
 import { AppService } from '../../app.service';
 import { Product, Category } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
+import { ProductService } from 'src/Services/ProductService';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,8 @@ export class ProductsComponent implements OnInit {
   public count:any;
   public sortings = ['Sort by Default', 'Best match', 'Lowest first', 'Highest first'];
   public sort:any;
-  public products: Array<Product> = [];
+  products:any[]=[];
+  res:any[]=[];
   public categories:Category[];
   public brands = [];
   public priceFrom: number = 750;
@@ -66,7 +68,8 @@ export class ProductsComponent implements OnInit {
               private activatedRoute: ActivatedRoute, 
               public appService:AppService, 
               public dialog: MatDialog, 
-              private router: Router) {
+              private router: Router,
+              private ps : ProductService) {
     this.settings = this.appSettings.settings;
   }
 
@@ -85,10 +88,23 @@ export class ProductsComponent implements OnInit {
 
     this.getCategories();
     this.getBrands();
-    this.getAllProducts();   
-  }
+   // this.getAllProducts();   
+    this.ps.getProduct().subscribe(data => {
+      this.res.push(data);},
+      e=>{},
+      ()=>{
+       this.res.forEach(element => {
+        for (var i = 0; i <= (Object.keys(this.res).length); i++) {
+          this.products.push(element[i]);
+        }
 
-  public getAllProducts(){
+    });
+    
+  });
+  }
+  
+
+  /*public getAllProducts(){
     this.appService.getProducts("featured").subscribe(data=>{
       this.products = data; 
       //for show more product  
@@ -96,7 +112,7 @@ export class ProductsComponent implements OnInit {
         this.products = this.products.concat(this.products);        
       }
     });
-  }
+  }*/
 
   public getCategories(){  
     if(this.appService.Data.categories.length == 0) { 
@@ -127,7 +143,7 @@ export class ProductsComponent implements OnInit {
 
   public changeCount(count){
     this.count = count;
-    this.getAllProducts(); 
+   // this.getAllProducts(); 
   }
 
   public changeSorting(sort){
@@ -154,7 +170,7 @@ export class ProductsComponent implements OnInit {
 
   public onPageChanged(event){
       this.page = event;
-      this.getAllProducts(); 
+     // this.getAllProducts(); 
       window.scrollTo(0,0); 
   }
 

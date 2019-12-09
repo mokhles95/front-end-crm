@@ -1,0 +1,32 @@
+
+
+
+
+
+<div fxLayout="row wrap" class="products-wrapper">
+    <div  fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+        <mat-card class="product-item text-center">
+            
+            
+                <img src="../../../assets/images/prodtest.jpg" alt="">
+           
+            <a  class="title text-truncate">
+                {{data.name}}
+            </a>
+            {{data.description}}
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                <div fxLayout="column" fxLayoutAlign="center start">
+                    <p class="new-price"> The unit price is : {{data.price}} DT</p>
+                </div>
+            </div>  
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                <div fxLayout="column" fxLayoutAlign="center start">
+                    <p class="new-price"> Product quantity : {{data.qte}} </p>
+                </div>
+            </div>                            
+            <div class="divider mt-2"></div>
+       
+            
+        </mat-card>
+    </div>
+</div>

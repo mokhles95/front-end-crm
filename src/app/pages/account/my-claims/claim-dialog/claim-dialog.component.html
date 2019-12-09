@@ -1,0 +1,34 @@
+<form [formGroup]="claimForm" (ngSubmit)="onClaimFormUpdate(claimForm.value)" fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+      <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subject</mat-label>
+            <input matInput placeholder="Subject" formControlName="subject" required value={{claim.subject}}>
+            <mat-error *ngIf="claimForm.controls.subject.hasError('minlength')">subject is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+      <mat-form-field>
+        <mat-label>Reclamaion type</mat-label>
+        <mat-select [(value)]="selected" placeholder="claimType" formControlName="claimType" required >
+          <mat-option value="Technique">Technique </mat-option>
+          <mat-option value="Financiere">Financiere </mat-option>
+          <mat-option value="Relationnelle">Relationnelle </mat-option>
+         
+        </mat-select>
+        <mat-error *ngIf="claimForm.controls.claimType.errors?.required">Reclamation type is required</mat-error>
+
+      </mat-form-field>
+    </div>
+   
+    <div fxFlex="100" class="px-1 mt-1">
+      <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Message</mat-label> 
+            <textarea matInput placeholder="Content" formControlName="content" required rows="7" value={{claim.content}} ></textarea> 
+            <mat-error *ngIf="claimForm.controls.content.hasError('minlength')">Message is required</mat-error>
+      </mat-form-field>
+    </div> 
+    <div class="w-100 py-2 text-center">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div> 
+</form>

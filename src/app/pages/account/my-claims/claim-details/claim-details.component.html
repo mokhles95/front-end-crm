@@ -1,0 +1,33 @@
+
+    <div fxLayout="row wrap" class="flex-wrapper">
+        <div fxFlex="100" fxFlex.sm="50" fxFlex.xs="100" class="col">
+            <mat-card class="p-0">
+              <mat-card-header class="p-1 account-card-title" fxLayoutAlign="space-between center">
+                  <mat-card-title class="m-0"><h3>My reclamation</h3></mat-card-title>
+                  <a mat-icon-button (click)="updateClaim()" *ngIf="claim.status=='waiting'"><mat-icon class="text-muted">edit</mat-icon></a>
+                  <a mat-icon-button (click)="deleteClaim()"><mat-icon>delete</mat-icon></a>
+              </mat-card-header>
+              <div class="divider"></div>
+              <mat-card-content >
+                 Title: <h4>{{claim.subject}}</h4>
+                 Content <h4>{{claim.content}}</h4>
+                 date: <h4>{{claim.date | date: 'dd/MM/yyyy'}}</h4>
+                 Type : <h4>{{claim.claimType}}</h4>
+                 Status : <h4>{{claim.status}}</h4>
+                 <div *ngIf="claim.solution!=null"> 
+                    Solution : <h4>{{claim.solution}}</h4>
+                 </div>
+                 <div *ngIf="claim.reason!=null"> 
+                    Solution : <h4>{{claim.reason}}</h4>
+                 </div>
+                 
+                 
+
+
+                 <!---- <p><a routerLink="/account/information" class="primary-text">Change password</a></p>-->
+              </mat-card-content>
+            </mat-card>
+        </div>
+       
+       
+    </div>

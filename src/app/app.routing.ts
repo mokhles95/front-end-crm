@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ClaimDetailsComponent } from './pages/account/my-claims/claim-details/claim-details.component';
 
 export const routes: Routes = [
     { 
@@ -20,6 +21,8 @@ export const routes: Routes = [
             { path: 'products', loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule), data: { breadcrumb: 'All Products' } }
         ]
     },
+   
+
     { path: '**', component: NotFoundComponent }
 ];
 

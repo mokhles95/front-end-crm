@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
   }
 
   public onLoginFormSubmit(values:Object):void {
-
+   location.replace('http://localhost:4201/');
     if (this.loginForm.valid ) {
       
       this.us.tryLogin(this.loginForm.get('email').value,this.loginForm.get('password').value).subscribe(result=>{this.user=JSON.parse(JSON.stringify(result))},

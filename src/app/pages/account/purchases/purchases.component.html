@@ -1,0 +1,30 @@
+<div class="row text-center text-black mb-5">
+    <div class="col-lg-7 mx-auto">
+        <h1 class="display-4">Purchases List</h1>
+        
+      </div>
+  </div>
+  <br><br><br>
+  
+  <div class="mat-table orders-table">
+      <div class="mat-header-row">
+        <div class="mat-header-cell">Date of purchase</div>
+        <div class="mat-header-cell">Price</div>
+        <div class="mat-header-cell"></div>
+      </div>
+      <div  *ngFor="let r of purchases" class="mat-row" >
+        <div class="mat-cell"><span class="order">{{r.datePur | date:'dd/MM/yyyy mm:ss:hh'}}</span></div>
+        <div class="mat-cell">{{r.sum * r.qte}} DT</div>
+        <div class="mat-cell">
+          <div class="p-1 actions" >  
+              <button (click)="openDialog(r)" mat-mini-fab color="primary" matTooltip="Details" class="btn-invoice">
+                  <mat-icon>remove_red_eye</mat-icon>
+              </button>
+ 
+            <button (click)="NavigateToBills()" mat-mini-fab color="primary" matTooltip="Bills" class="btn-invoice">
+                <mat-icon>receipt</mat-icon>
+            </button>
+          </div>
+        </div>      
+      </div>
+    </div>

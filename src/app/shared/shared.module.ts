@@ -53,6 +53,7 @@ import { ProductDialogComponent } from './products-carousel/product-dialog/produ
 import { BannersComponent } from './banners/banners.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -147,10 +148,10 @@ import { CategoryListComponent } from './category-list/category-list.component';
     ProductsCarouselComponent,
     ProductDialogComponent,
     BannersComponent,
-    CategoryListComponent
+    CategoryListComponent,
   ],
   entryComponents:[
-    ProductDialogComponent
+    ProductDialogComponent,
   ],
   providers:[
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }

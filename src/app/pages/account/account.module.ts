@@ -8,7 +8,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { OrdersComponent } from './orders/orders.component';
-import {MyClaimsComponent} from './my-claims/my-claims.component'
+import {MyClaimsComponent} from './my-claims/my-claims.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+import { PurchasesComponent } from './purchases/purchases.component';
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
+import { BillsComponent } from './bills/bills.component'
 export const routes = [
   { 
       path: '', 
@@ -18,7 +22,10 @@ export const routes = [
           { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' } },
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
           { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
-          { path: 'myClaims', component: MyClaimsComponent, data: {  breadcrumb: 'claims' } }
+          { path: 'myClaims', component: MyClaimsComponent, data: {  breadcrumb: 'claims' } },
+          { path: 'reservations', component: ReservationsComponent, data: {  breadcrumb: 'reservation' } },
+          { path: 'bills/:id', component: BillsComponent, data: {  breadcrumb: 'bill' } },
+          { path: 'purchases', component: PurchasesComponent, data: {  breadcrumb: 'purchase' } }
       ]
   }
 ];
@@ -36,7 +43,14 @@ export const routes = [
     InformationComponent,
     AddressesComponent,
     OrdersComponent,
-    MyClaimsComponent
-  ]
+    MyClaimsComponent,
+    ReservationsComponent,
+    PurchasesComponent,
+    PurchaseDetailsComponent,
+    BillsComponent
+  ],
+  entryComponents:[
+    PurchaseDetailsComponent
+  ],
 })
 export class AccountModule { }

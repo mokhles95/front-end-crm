@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { emailValidator, matchingPasswords } from '../../theme/utils/app-validators';
 import { UserService } from 'src/Services/UserService';
 import { Prospect } from 'src/Models/Prospect';
+import {MatDialog} from '@angular/material/dialog';
+import { ForgetDialogComponent } from '../forget-dialog/forget-dialog.component';
+
+
 
 @Component({
   selector: 'app-sign-in',
@@ -15,8 +19,10 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   user : Prospect= new Prospect();
+  registerResult = ";"
+  exist =""
   
-  constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar,private us:UserService) { }
+  constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar,private us:UserService,private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -26,7 +32,10 @@ export class SignInComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'lastName': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'email': ['', Validators.compose([Validators.required, emailValidator])],
+      'phoneNumber': ['', Validators.compose([Validators.required,Validators.pattern('[259][0-9]{7}')])],
+      'operator': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.required],
       'confirmPassword': ['', Validators.required]
     },{validator: matchingPasswords('password', 'confirmPassword')});
@@ -42,21 +51,54 @@ export class SignInComponent implements OnInit {
         () => {
          console.log(this.user)
           if(this.user!=null){
+            if(!this.user.confirmed){
+              this.snackBar.open('you need to confirm your registration first!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
+            }else
+            if(this.user.disabled){
+              this.snackBar.open('this account is disabled please reactivate your account first!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
+            }
+            else{
             localStorage.setItem('User',JSON.stringify(this.user));
             location.replace('/');
+            }
            }
           else if(this.user===null) {
-            console.log('invalide')
+            this.snackBar.open('Please verify your email or password!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });    
           }
         });
-     // this.router.navigate(['/']);
     }
   }
 
   public onRegisterFormSubmit(values:Object):void {
     if (this.registerForm.valid) {
-      this.snackBar.open('You registered successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+      this.us.tryRegister(this.registerForm.get('email').value,this.registerForm.get('password').value,this.registerForm.get('name').value,this.registerForm.get('lastName').value,this.registerForm.get('phoneNumber').value,this.registerForm.get('operator').value).subscribe(result=>{this.registerResult = result},
+        e => {},
+        ()=> {
+          this.snackBar.open('You registered successfully, Please check your email to confirm your registration!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 5000 });
+        })
     }
   }
+
+  public mailVerification() {
+   this.us.mailVerif(this.registerForm.get('email').value).subscribe(res=>{this.exist=res},
+    e=>{},
+    ()=>{
+      if(this.exist==="yes"){
+        return this.registerForm.get('email').setErrors({existingMail: true})
+      }
+    })
+    
+}
+
+openDialog(): void {
+  const dialogRef = this.dialog.open(ForgetDialogComponent, {
+    width: '600px',height: '250px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    
+
+  });
+}
 
 }

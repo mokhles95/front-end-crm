@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { SignInComponent } from './sign-in.component';
+import { ForgetDialogComponent } from '../forget-dialog/forget-dialog.component';
 
 export const routes = [
   { path: '', component: SignInComponent, pathMatch: 'full' }
@@ -17,7 +18,11 @@ export const routes = [
     SharedModule
   ],
   declarations: [
-    SignInComponent
+    SignInComponent,
+    ForgetDialogComponent
+  ],
+  entryComponents: [
+    ForgetDialogComponent
   ]
 })
 export class SignInModule { }

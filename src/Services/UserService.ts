@@ -23,6 +23,10 @@ export class UserService {
   }
 
   forgetPassword(mail:string){
-    return this.http.post(this.baseUrl+"/user?login="+mail,null,{ responseType: 'text' })
+    return this.http.post(this.baseUrl+"/user/forgetPassword?login="+mail,null,{ responseType: 'text' })
+  }
+
+  tokenVerif(token: string) {
+    return this.http.get(this.baseUrl + "/user/"+ token, { responseType: 'text' })
   }
 }

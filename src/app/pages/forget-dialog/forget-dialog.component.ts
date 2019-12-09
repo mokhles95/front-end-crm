@@ -29,8 +29,8 @@ export class ForgetDialogComponent implements OnInit {
 
   }
 
-  onForgetFormSubmit(forgetForm){
-    this.us.forgetPassword(forgetForm.get('email').value).subscribe(res=>{this.result=res},
+  onForgetFormSubmit(forget){
+    this.us.forgetPassword(this.forgetForm.get('email').value).subscribe(res=>{this.result=res},
       e=>{},
       ()=>{
          if(this.result==="user not existing"){

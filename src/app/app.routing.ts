@@ -7,6 +7,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ClaimDetailsComponent } from './pages/account/my-claims/claim-details/claim-details.component';
 
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
 
 
 export const routes: Routes = [
@@ -25,7 +26,8 @@ export const routes: Routes = [
             { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule), data: { breadcrumb: 'Sign In ' } },
             { path: 'brands', loadChildren: () => import('./pages/brands/brands.module').then(m => m.BrandsModule), data: { breadcrumb: 'Brands' } },
             { path: 'products', loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule), data: { breadcrumb: 'All Products' } },
-            { path: 'reset/:mail/:token', component: ResetPasswordComponent }
+            { path: 'reset/:mail/:token', component: ResetPasswordComponent },
+            { path: 'confirm/:mail/:token', component: ConfirmRegisterComponent }
         ]
     },
    

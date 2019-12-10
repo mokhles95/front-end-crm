@@ -27,6 +27,7 @@ import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
 
 
 
@@ -54,7 +55,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     BreadcrumbComponent,
     OptionsComponent,
     FooterComponent,
-    ResetPasswordComponent   
+    ResetPasswordComponent,
+    ConfirmRegisterComponent   
   ], 
   providers: [
     AppSettings,

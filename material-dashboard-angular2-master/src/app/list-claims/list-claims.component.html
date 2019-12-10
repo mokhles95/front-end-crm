@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">list Claims</h4>
+                      
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      subject
+                                  </th>
+                                  <th>
+                                      conent
+                                  </th>
+                                  <th>
+                                      date
+                                  </th>
+                                  <th>
+                                      City
+                                  </th>
+                                  <th>
+                                    
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  
+                                
+                                  <tr *ngFor="let c of listClaims">
+                                      <td>
+                                          {{c.subject}}
+                                      </td>
+                                      
+                                      <td>
+                                          {{c.content}}
+                                      </td>
+                                      <td>
+                                          {{c.status}}
+                                      </td>
+                                      <td class="text-primary">
+                                          {{c.date | date: 'MMM d, y, h:mm:ss a' }}
+                                      </td>
+
+                                      <td>
+                                        <button type="button" class="btn btn-outline-info">detail</button>
+                                      </td>
+
+                                     
+                                  </tr>
+                                 
+              

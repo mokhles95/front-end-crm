@@ -1,0 +1,72 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<br><br><br><br><br><br>
+<div class="container">
+    <form >
+        <h1><b><i><u>Add Publicity</u></i></b></h1>
+        <br>
+
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <input name="achraf" type="text" [(ngModel)]="idProd" class="form-control" placeholder="idProd">
+                    <br>
+                    <div class="input-group date" [ngClass]="{'input-group-focus':focus===true}">
+                        <input class="form-control" placeholder="start date"
+                               name="dp" [(ngModel)]="startdate" id="3" type="date"  />
+                        <br> <div class="input-group-append">
+                                    <span class="glyphicon glyphicon-calendar input-group-text">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                          </span>
+                    </div>
+
+                    </div>
+                    <br>
+                    <div class="input-group date" [ngClass]="{'input-group-focus':focus===true}">
+                        <input class="form-control" placeholder="finish date" id="2"
+                               name="dp2" [(ngModel)]="finishdate" type="date"   />
+                        <div class="input-group-append">
+                                    <span class="glyphicon glyphicon-calendar input-group-text">
+                                       <i class="fa fa-calendar" aria-hidden="true"></i>
+                                   </span>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+
+                        <br>
+                        <input type="file" class="btn btn-danger btn-block btn-round" color="red" (change)="handleUpload($event)" width="220px" height="220px">
+                        <br>
+                    </div>
+                    <br>
+                    <button class="btn btn-danger btn-block btn-round" (click)="ajouterPub()">Add</button>
+                    <br>
+
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+            </div>
+
+
+            <div class="col-sm-4">
+
+
+                <img id="blah" [src]="logo || 'http://placehold.it/180'" alt="your image" width="360px" height="360px"/>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+
+

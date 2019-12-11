@@ -27,6 +27,13 @@ import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
+import { ListPubComponent } from './pages/pubBack/list-pub/list-pub.component';
+import { PubAddComponent } from './pages/pubBack/pub-add/pub-add.component';
+import { PubModifyComponent } from './pages/pubBack/pub-modify/pub-modify.component';
+import { ListoffersComponent } from './pages/OffersFront/listoffers/listoffers.component';
+import { MyoffersComponent } from './pages/OffersFront/myoffers/myoffers.component';
+import { OfferProductChartComponent } from './pages/mychart/offer-product-chart/offer-product-chart.component';
 
 
 
@@ -54,7 +61,14 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     BreadcrumbComponent,
     OptionsComponent,
     FooterComponent,
-    ResetPasswordComponent   
+    ResetPasswordComponent,
+    ConfirmRegisterComponent,
+    ListPubComponent,
+    PubAddComponent,
+    PubModifyComponent,
+    ListoffersComponent,
+    MyoffersComponent,
+    OfferProductChartComponent   
   ], 
   providers: [
     AppSettings,

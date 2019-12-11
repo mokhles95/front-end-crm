@@ -1,0 +1,66 @@
+<!--
+<div *ngIf="Offers" >
+
+        <div *ngFor="let offer of Offers">
+          <table>
+              <tr>
+                <img  [src]='assets/images/carousel/banner1.jpg' alt="your image" width="400px" height="400px"/>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+
+
+                </tr>
+                </table>
+        </div>
+
+
+    </div>
+-->
+<table >
+    <tr>
+
+        <td *ngFor="let offer of Offers">  <img  src="assets\images\carousel\banner2.jpg" alt="your image" width="200px" height="200px"/> </td>
+
+
+    </tr>
+
+    <tr>
+
+        <td *ngFor="let offer of Offers">  <h2 class="title"> {{offer.product.name}} </h2> </td>
+
+    </tr>
+    <tr>
+
+
+        <td *ngFor="let offer of Offers">  <p class="old-price text-muted"> {{offer.product.price }} </p>  </td>
+
+    </tr>
+
+    <tr>
+
+        <td *ngFor="let offer of Offers">
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                <div fxLayout="column" fxLayoutAlign="center start">
+                    <mat-chip-list *ngIf="offer.reduction">
+                        <mat-chip color="warn" selected="true"> <span> {{offer.reduction}}% OFF </span></mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+        </td>
+
+
+    </tr>
+    <tr>
+
+        <td *ngFor="let offer of Offers"> <h2 class="title"> {{offer.product.categorie }} </h2>  </td>
+
+    </tr>
+    <tr>
+
+        <td  *ngFor="let offer of Offers"> <h2 class="title"> {{offer.product.description }} </h2>  </td>
+
+    </tr>
+</table>

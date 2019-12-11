@@ -1,0 +1,36 @@
+
+
+<br><br><br><br><br><br>
+<div class="container">
+    <form >
+        <h1><b><i><u>Modify Publicity</u></i></b></h1>
+        <br>
+
+
+        <div class="col-sm-4">
+
+            <br>
+            <input type="file" class="btn btn-danger btn-block btn-round" color="blue" (change)="handleUpload($event)" width="220px" height="220px">
+            <br>
+
+            <br>
+            <button class="btn btn-danger btn-block btn-round" color="red" (click)="modifyPub()">Modifier</button>
+            <br>
+
+
+        </div>
+
+
+
+
+        <div class="col-sm-4">
+
+
+            <img id="blah" [src]="logo || 'http://placehold.it/180'" alt="your image" width="360px" height="360px"/>
+
+        </div>
+    </form>
+</div>
+
+
+

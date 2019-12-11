@@ -1,2 +1,2 @@
-/node_modules
-/material-dashboard-angular2-master/node_modules
+/node_modules/
+/material-dashboard-angular2-master/node_modules/

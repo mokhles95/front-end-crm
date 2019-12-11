@@ -1,0 +1,54 @@
+<br><br><br><br><br><br>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+            <div class="container">
+              <h1><b><i><u>Publicities</u></i></b></h1>
+                <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">idPub</th>
+                        <th scope="col">startDate</th>
+                        <th scope="col">finishDate</th>
+                        <th scope="col">image</th>
+                        <th scope="col"></th>
+                        <th > </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="table-active" *ngFor="let a of publicities">               
+                       <th >{{a.Id}}</th>         
+                        <th>{{a.StartDate}}</th>
+                        <th>{{a.FinishDate}}</th>           
+                      <td>  <img id="blah" [src]="a.ImageUrl" alt="your image" width="100px" height="100px"/></td>
+                  <td> <p>
+                      <button class="btn btn-info btn-lg" (click)="deletePub(a.Id)">
+                          <span class="glyphicon glyphicon-remove" ></span> Remove
+                      </button>
+                  </p> </td> <td>
+                    <button class="btn btn-info btn-lg"  (click)="modifierPub(a.Id)"> <span class="glyphicon glyphicon-edit"></span> Edit</button> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+
+
+
+
+                <!--
+                <button (click)='startTimer()'>Start Timer</button>
+<button (click)='pauseTimer()'>Pause</button>
+
+<p>{{timeLeft}} Seconds Left....</p>   
+-->      
+<app-modify-pub *ngIf=test [id]=id></app-modify-pub> 
+                      
+          
+        

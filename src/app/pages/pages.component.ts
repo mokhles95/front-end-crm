@@ -5,11 +5,6 @@ import { AppService } from '../app.service';
 import { Category, Product } from '../app.models';
 import { SidenavMenuService } from '../theme/components/sidenav-menu/sidenav-menu.service';
 import { Prospect } from 'src/Models/Prospect';
-import { BasketService } from 'src/Services/BasketService';
-import { CartService } from 'src/Services/CartService';
-import { Basket } from 'src/Models/Basket';
-import { ReservationService } from 'src/Services/ReservationService';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-pages',
@@ -22,24 +17,14 @@ export class PagesComponent implements OnInit {
   public categories:Category[];
   public category:Category;
   public sidenavMenuItems:Array<any>;
-  nbprod:number;
-  res : any[];
   user :Prospect = new Prospect();
-  basket : Basket[];
-  vide : string;
-  totalPrice:number=0;
-  msgRemoveProd="";
-  msgBooking="";
   @ViewChild('sidenav', { static: true }) sidenav:any;
 
   public settings: Settings;
   constructor(public appSettings:AppSettings, 
               public appService:AppService, 
               public sidenavMenuService:SidenavMenuService,
-              public router:Router,
-              private basketserv : BasketService,
-              private bookserv : ReservationService,
-              private snackBar :MatSnackBar) { 
+              public router:Router) { 
     this.settings = this.appSettings.settings; 
   }
 
@@ -47,7 +32,6 @@ export class PagesComponent implements OnInit {
     this.user=JSON.parse(localStorage.getItem('User'))
     this.getCategories();
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
-    this.appService.getNbreProdPerCart();
   } 
 
   public getCategories(){    
@@ -68,13 +52,6 @@ export class PagesComponent implements OnInit {
   }
 
   public remove(product) {
-    this.basketserv.removeOneProductFromBasket(this.user.id,product.idProduct).subscribe(result=>{this.msgRemoveProd=result},
-      e=>{},
-      ()=>{
-        if(this.msgRemoveProd==='removed successfully'){
-          this.ngOnInit();
-        }
-      })
       const index: number = this.appService.Data.cartList.indexOf(product);
       if (index !== -1) {
           this.appService.Data.cartList.splice(index, 1);
@@ -139,43 +116,6 @@ export class PagesComponent implements OnInit {
     if(window.innerWidth < 960){
       this.sidenavMenuService.closeAllSubMenus();
     }    
-  }
-  getBasket(){
-    
-    this.totalPrice=0;
-    this.basketserv.getBasket(this.user.id).subscribe(result=>{this.basket=JSON.parse(JSON.stringify(result))},
-    e=>{},
-    ()=>{
-      console.log(this.basket)
-      if(this.basket.length!=-1){
-        this.vide="no"
-      }
-      this.basket.forEach(element => {
-      this.totalPrice+=(element.price)*element.qte;
-    });
-    
-  }
-    )
-  }
-
-  bookCart(){
-    this.bookserv.bookBasket(this.user.id).subscribe(result=>{this.msgBooking=result},
-      e=>{},
-      ()=>{
-        if(this.msgBooking==='ok'){
-          this.router.navigateByUrl('/account/reservations');
-    let message =  'You passed a reservation and you should pay it in two days'; 
-    status = 'success';          
-    this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 10000 });
-        }
-        else if(this.msgBooking==='you have already a reservation'){
-          let message = 'you have already a reservation'; 
-          status = 'error';          
-          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 10000 });
-        }
-      })
-
-
   }
 
 }

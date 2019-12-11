@@ -2,9 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Data, AppService } from '../../app.service';
 import { Product } from '../../app.models';
-import { BasketService } from 'src/Services/BasketService';
-import { Prospect } from 'src/Models/Prospect';
-import { CartService } from 'src/Services/CartService';
 
 @Component({
   selector: 'app-controls',
@@ -17,11 +14,8 @@ export class ControlsComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Output() onQuantityChange: EventEmitter<any> = new EventEmitter<any>();
   public count:number = 1;
-  user : Prospect;
-  msgResultAdd : any;
-  res : any[];
   public align = 'center center';
-  constructor(public appService:AppService, public snackBar: MatSnackBar,private basketserv : BasketService) { }
+  constructor(public appService:AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if(this.product){
@@ -82,8 +76,8 @@ export class ControlsComponent implements OnInit {
   }
 
   public addToCart(product:Product){
-this.user=JSON.parse(localStorage.getItem('User'));
-   /* let currentProduct = this.appService.Data.cartList.filter(item=>item.id == product.id)[0];
+    // console.log(product)
+    let currentProduct = this.appService.Data.cartList.filter(item=>item.id == product.id)[0];
     if(currentProduct){
       if((currentProduct.cartCount + this.count) <= this.product.availibilityCount){
         product.cartCount = currentProduct.cartCount + this.count;
@@ -95,27 +89,8 @@ this.user=JSON.parse(localStorage.getItem('User'));
     }
     else{
       product.cartCount = this.count;
-    }*/
-    this.basketserv.addProductToBasket(this.user.id,product.id).subscribe(result=>{this.msgResultAdd=result},
-      e=>{},
-      ()=>{
-        if(this.msgResultAdd==='added successfully'){
-          /*this.basketserv.getBasket(this.user.id).subscribe(result=>{this.res=JSON.parse(JSON.stringify(result))},
-          e=>{},
-          ()=>{
-            let nbre=0;
-            this.res.forEach(element => {
-              nbre+=element.qte;
-            });
-            CartService.cartQte=nbre;
-          }
-          )*/
-          product.cartCount = this.count;
-          this.appService.addToCart(product);
-        }
-      })
-
-    
+    }
+    this.appService.addToCart(product);
   }
 
   public openProductDialog(event){

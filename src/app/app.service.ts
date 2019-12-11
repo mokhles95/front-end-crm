@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { Category, Product } from './app.models';
-import { BasketService } from 'src/Services/BasketService';
-import { Prospect } from 'src/Models/Prospect';
-import { CartService } from 'src/Services/CartService';
 
 export class Data {
     constructor(public categories: Category[],
@@ -18,10 +15,6 @@ export class Data {
 
 @Injectable()
 export class AppService {
-    user:Prospect;
-    res : any[];
-    nbreProdCart:number;
-    currentDate : number;
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -31,7 +24,7 @@ export class AppService {
         0 //totalCartCount
     )
     public url = "assets/data/";
-    constructor(public http:HttpClient, public snackBar: MatSnackBar,private basketserv: BasketService) { }
+    constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
     
     public getCategories(): Observable<Category[]>{
         return this.http.get<Category[]>(this.url + 'categories.json');
@@ -62,7 +55,6 @@ export class AppService {
         }
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     }
-    
 
     public addToWishList(product:Product){
         let message, status;
@@ -77,24 +69,11 @@ export class AppService {
         }
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     } 
-    public getNbreProdPerCart(){
-        this.user=JSON.parse(localStorage.getItem('User'))
-        this.basketserv.getBasket(this.user.id).subscribe(result=>{this.res=JSON.parse(JSON.stringify(result))},
-          e=>{},
-          ()=>{
-            let nbre=0;
-            this.res.forEach(element => {
-              nbre+=element.qte;
-            });
-           this.nbreProdCart=nbre;
-          }
-          )
-    }
 
     public addToCart(product:Product){
         let message, status;        
-        
-       /* this.Data.totalPrice = null;
+       
+        this.Data.totalPrice = null;
         this.Data.totalCartCount = null;
 
         if(this.Data.cartList.filter(item=>item.id == product.id)[0]){ 
@@ -107,18 +86,7 @@ export class AppService {
         this.Data.cartList.forEach(product=>{
             this.Data.totalPrice = this.Data.totalPrice + (product.cartCount * product.newPrice);
             this.Data.totalCartCount = this.Data.totalCartCount + product.cartCount;
-        });*/
-        this.user=JSON.parse(localStorage.getItem('User'))
-        this.basketserv.getBasket(this.user.id).subscribe(result=>{this.res=JSON.parse(JSON.stringify(result))},
-          e=>{},
-          ()=>{
-            let nbre=0;
-            this.res.forEach(element => {
-              nbre+=element.qte;
-            });
-           this.nbreProdCart=nbre;
-          }
-          )
+        });
 
         message = 'The product ' + product.name + ' has been added to cart.'; 
         status = 'success';          
@@ -421,9 +389,7 @@ export class AppService {
     }
 
     public getYears(){
-        
-        this.currentDate=(new Date()).getFullYear();
-        return [ this.currentDate+1, this.currentDate+2, this.currentDate+3,this.currentDate+4,this.currentDate+5,this.currentDate+6,this.currentDate+7,this.currentDate+8,this.currentDate+9]
+        return ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" ]
     }
 
     public getDeliveryMethods(){

@@ -2,13 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material';
 import { Data, AppService } from '../../app.service';
-import { ReservationService } from 'src/Services/ReservationService';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Prospect } from 'src/Models/Prospect';
-import { emailValidator } from '../../theme/utils/app-validators';
-import{PurchaseService} from 'src/Services/PurchaseService';
-import { MatSnackBar } from '@angular/material';
-
 
 @Component({
   selector: 'app-checkout',
@@ -26,20 +19,10 @@ export class CheckoutComponent implements OnInit {
   years = [];
   deliveryMethods = [];
   grandTotal = 0;
-  msgresultRes:any;
-  user : Prospect;
 
-  constructor(private router : Router,private purserv: PurchaseService,private snackBar :MatSnackBar, public appService:AppService,private route: ActivatedRoute, public formBuilder: FormBuilder,private resserv : ReservationService) { }
+  constructor(public appService:AppService, public formBuilder: FormBuilder) { }
 
-  ngOnInit() {  
-    this.user=JSON.parse(localStorage.getItem('User'))
-    this.resserv.getOneReservation(this.route.snapshot.paramMap.get('id') ).subscribe(result=>{this.msgresultRes=result},
-    e=>{},
-    ()=>{
-      if(this.msgresultRes==='no'){
-this.router.navigateByUrl('**');
-      }
-    })
+  ngOnInit() {    
     this.appService.Data.cartList.forEach(product=>{
       this.grandTotal += product.cartCount*product.newPrice;
     });
@@ -48,10 +31,15 @@ this.router.navigateByUrl('**');
     this.years = this.appService.getYears();
     this.deliveryMethods = this.appService.getDeliveryMethods();
     this.billingForm = this.formBuilder.group({
-      firstName: [this.user.firstName, Validators.required],
-      lastName: [this.user.lastName, Validators.required],
-      email: [this.user.email, Validators.compose([Validators.required, emailValidator])],
-      phone: [this.user.phone, Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      middleName: '',
+      company: '',
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      state: '',
       zip: ['', Validators.required],
       address: ['', Validators.required]
     });
@@ -63,6 +51,7 @@ this.router.navigateByUrl('**');
       cardNumber: ['', Validators.required],
       expiredMonth: ['', Validators.required],
       expiredYear: ['', Validators.required],
+      cvv: ['', Validators.required]
     });
   }
 
@@ -73,16 +62,6 @@ this.router.navigateByUrl('**');
     this.appService.Data.totalPrice = 0;
     this.appService.Data.totalCartCount = 0;
 
-  }
-
-  confirm(){
-    this.purserv.Buy(this.route.snapshot.paramMap.get('id'),this.user.id).subscribe(res=>{},e=>{},()=>{
-      this.appService.getNbreProdPerCart();
-      this.router.navigateByUrl('/account/purchases');
-      let message =  'congratulations! We will deliver your products as soon as possible'; 
-    status = 'success';          
-    this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 10000 });
-    })
   }
 
 }

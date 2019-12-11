@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+    <mat-sidenav-content class="all-products" ngClass.gt-sm="p-left">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center"
+             class="filter-row mat-elevation-z1 text-muted">
+            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Shop Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="name" (keyup)="filter($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div fxLayout="row wrap" class="products-wrapper">
+            <div *ngFor="let item of shopClone" fxFlex="100"
+                 [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                <mat-card class="product-item text-center">
+                    <h4 class="category text-muted">{{item.name}}</h4>
+                    <p class="title text-truncate">
+                        {{item.location}}
+                    </p>
+                    <div class="divider"></div>
+                    <p class="text-truncate">
+                        Phone :  {{item.phone}}
+                    </p>
+                </mat-card>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

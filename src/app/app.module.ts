@@ -26,9 +26,7 @@ import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
-
+import { ShopsComponent } from './pages/shops/shops.component';
 
 
 @NgModule({
@@ -55,8 +53,6 @@ import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-regis
     BreadcrumbComponent,
     OptionsComponent,
     FooterComponent,
-    ResetPasswordComponent,
-    ConfirmRegisterComponent   
   ], 
   providers: [
     AppSettings,

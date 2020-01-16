@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Prospect } from 'src/Models/Prospect';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +49,10 @@ export class UserService {
 
   confirmRegister(login : string){
     return this.http.put(this.baseUrl + "/user/confirm/"+login, null, { responseType: 'text' });
+  }
+
+  updateProspect(p: Prospect){
+    return this.http.put(this.baseUrl + "/user/update", p, { responseType: 'text' });
   }
 
 }

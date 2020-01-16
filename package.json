@@ -29,6 +29,7 @@
     "ngx-spinner": "8.0.3",
     "ngx-swiper-wrapper": "8.0.2",
     "rxjs": "6.5.2",
+    "xdlocalstorage": "^2.0.5",
     "zone.js": "0.10.1"
   },
   "devDependencies": {

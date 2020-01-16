@@ -84,8 +84,8 @@ export class SignInComponent implements OnInit {
     ()=>{if(this.agent==null){
       this.snackBar.open('Please verify your email or password!', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
     }else{
-      localStorage.setItem('agent', JSON.stringify(this.agent));
-      location.replace('http://localhost:4201/');
+      
+      location.replace('http://localhost:4201/dashboard/'+this.agent.id);
     }})}
   }
 

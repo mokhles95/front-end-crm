@@ -8,6 +8,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { ListClaimsComponent } from '../../list-claims/list-claims.component';
+import { ProspectTableComponent } from 'app/prospect-table/prospect-table.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -44,7 +46,7 @@ export const AdminLayoutRoutes: Routes = [
     //     children: [ {
     //         path: 'typography',
     //         component: TypographyComponent
-    //     }]
+    //     }]//
     // }, {
     //     path: '',
     //     children: [ {
@@ -53,8 +55,11 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard',      component: DashboardComponent },
+    { path: 'dashboard/:id',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
+    { path: 'listClaims',     component: ListClaimsComponent },
+    { path: 'Prospects',      component: ProspectTableComponent},
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },

@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Prospects List</h4>
+                      <mat-form-field >
+                        <input matInput placeholder="Search" [(ngModel)]="term" >
+                      </mat-form-field>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      First Name
+                                  </th>
+                                  <th>
+                                      Last Name
+                                  </th>
+                                  <th>
+                                      Email
+                                  </th>
+                                  <th>
+                                      Register Date
+                                  </th>
+                                  <th>
+                                      Phone
+                                  </th>
+                                  <th>
+                                      Details
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let p of prospects |filter:term">
+                                      <td>
+                                          {{p.firstName}}
+                                      </td>
+                                      <td>
+                                          {{p.lastName}}
+                                      </td>
+                                      <td>
+                                          {{p.email}}
+                                      </td>
+                                      <td>
+                                        {{p.registerDate | date: 'MMM d, y' }}
+                                      </td>
+                                      <td >
+                                          {{p.phone}}
+                                      </td>
+                                      <td>
+                                        <button mat-mini-fab color="primary" matTooltip="View" (click)="navigateToDetails(p)" >
+                                            <i>home</i>
+                                        </button>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

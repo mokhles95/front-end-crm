@@ -4,6 +4,8 @@ import { emailValidator } from '../../theme/utils/app-validators';
 import { ClaimService } from 'src/Services/ClaimService';
 import { Prospect } from 'src/Models/Prospect';
 import { Claim } from 'src/Models/Claim';
+import { MatSnackBar, MatPaginator } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +19,7 @@ export class ContactComponent implements OnInit {
   type: string[] = ["financier", "technique","Relationnel" 
   ];
 
-  constructor(public formBuilder: FormBuilder, public fb:FormBuilder, private cs: ClaimService) { }
+  constructor(public formBuilder: FormBuilder, public fb:FormBuilder, private cs: ClaimService, private snackBar :MatSnackBar,private router : Router) { }
 user : Prospect = new Prospect();
 claim : Claim = new Claim();
 
@@ -61,6 +63,14 @@ resultMessage :string;
         },
         ()=> {
           console.log(this.resultMessage);
+		  let message =  'Claim passed successfully'; 
+    status = 'success';          
+    this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 50000 });
+          this.router.navigateByUrl('')
+		  this.claim=new Claim();
+
+
+
         }
       )
       console.log(this.user.operator.id)

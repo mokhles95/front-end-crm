@@ -11,7 +11,7 @@ baseUrl="/api";
    
     addProductToBasket(idProspect:any,idProduct:any){
         
-        return  this.http.post(this.baseUrl+"/basket/?idProspect="+idProspect+"&idProduct="+idProduct,null,{responseType: 'text'});
+        return  this.http.post(this.baseUrl+"/basket/"+idProspect+"/"+idProduct,null,{responseType: 'text'});
       }
     getBasket(idProspect :any){
         return  this.http.get(this.baseUrl+"/basket/"+idProspect);

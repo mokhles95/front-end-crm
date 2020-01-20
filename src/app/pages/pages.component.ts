@@ -30,6 +30,7 @@ export class PagesComponent implements OnInit {
   totalPrice:number=0;
   msgRemoveProd="";
   msgBooking="";
+  title:string
   @ViewChild('sidenav', { static: true }) sidenav:any;
 
   public settings: Settings;
@@ -45,6 +46,12 @@ export class PagesComponent implements OnInit {
 
   ngOnInit() {
     this.user=JSON.parse(localStorage.getItem('User'))
+	if(this.user!=null){
+      this.title="Oreedoo";
+      if(this.user.operator.id==1)
+      this.settings.theme = 'red'; 
+    } 
+    else this.title="CRM APP"
     this.getCategories();
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
     this.appService.getNbreProdPerCart();
